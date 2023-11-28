@@ -1,4 +1,5 @@
 import "./style.css";
+import { useState } from "react";
 
 const initialFact = [
   {
@@ -30,6 +31,8 @@ const CATEGORIES = [
 ];
 
 function App() {
+  const [showForm, setShowForm] = useState(false);
+
   const appTitle = "Today I Learned";
 
   return (
@@ -44,9 +47,14 @@ function App() {
           />
           <h1>{appTitle}</h1>
         </div>
-        <button className="btn btn-large btn-open">Share a fact</button>
+        <button
+          className="btn btn-large btn-open"
+          onClick={() => setShowForm((show) => !show)}
+        >
+          {showForm ? "Close form" : "Share a fact"}
+        </button>
       </header>
-      <NewFactForm />
+      {showForm ? <NewFactForm /> : null}
       <main className="main">
         <CategoryFilter />
         <FactList />
@@ -116,8 +124,8 @@ function CategoryFilter() {
   return (
     <aside>
       <ul>
-        <li class="category">
-          <button class="btn btn-all-categories">All</button>
+        <li className="category">
+          <button className="btn btn-all-categories">All</button>
         </li>
         {CATEGORIES.map((category) => (
           <Category key={category.name} category={category} />
@@ -129,9 +137,9 @@ function CategoryFilter() {
 
 function Category({ category }) {
   return (
-    <li class="category">
+    <li className="category">
       <button
-        class="btn btn-category"
+        className="btn btn-category"
         style={{ backgroundColor: category.color }}
       >
         {category.name}
