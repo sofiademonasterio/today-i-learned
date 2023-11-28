@@ -116,6 +116,9 @@ function CategoryFilter() {
   return (
     <aside>
       <ul>
+        <li class="category">
+          <button class="btn btn-all-categories">All</button>
+        </li>
         {CATEGORIES.map((category) => (
           <Category key={category.name} category={category} />
         ))}
